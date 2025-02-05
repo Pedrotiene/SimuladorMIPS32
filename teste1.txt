@@ -1,0 +1,8 @@
+addi $t0, $zero, 5    # $t0 = 5
+
+li $v0, 1
+add $a0, $t0, $zero
+syscall
+
+li $v0, 10
+syscall
