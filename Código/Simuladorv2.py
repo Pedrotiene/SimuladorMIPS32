@@ -28,8 +28,8 @@ class SimuladorMIPS32:
         with open(nome_arquivo, 'r') as arquivo:
             secao = None
             for linha in arquivo.readlines():
-                linha = linha.split('#')[0].strip()  # Remove comentários
-                if not linha:  # Ignora linhas vazias
+                linha = linha.split('#')[0].strip()
+                if not linha:
                     continue
                 if linha.startswith('.data'):
                     secao = 'data'
@@ -45,13 +45,13 @@ class SimuladorMIPS32:
                                 valores = [int(valor.strip()) for valor in partes[2].split(',')]
                                 self.vetores[var] = valores
                             except ValueError:
-                                print(f"Erro: Valor inválido na linha: {linha}")
+                                print(f"Erro: Valor inválido na linha1: {linha}")
                         elif tipo == '.byte':
                             try:
                                 valores = [int(valor.strip()) for valor in partes[2].split(',')]
                                 self.vetores[var] = valores
                             except ValueError:
-                                print(f"Erro: Valor inválido na linha: {linha}")
+                                print(f"Erro: Valor inválido na linha2: {linha}")
                         elif tipo == '.space':
                             try:
                                 tamanho = int(partes[2])
@@ -63,7 +63,7 @@ class SimuladorMIPS32:
                                 valor = int(partes[2]) if len(partes) > 2 else 0
                                 self.dados[var] = valor
                             except ValueError:
-                                print(f"Erro: Valor inválido na linha: {linha}")
+                                print(f"Erro: Valor inválido na linha3: {linha}")
                 elif secao == 'text' and linha:
                     if linha.endswith(':'):
                         rotulo = linha[:-1]
@@ -88,7 +88,6 @@ class SimuladorMIPS32:
         partes = instrucao.replace(',', '').split()
         opcode = partes[0]
 
-        # Exibir código binário na interface
         binario = self.traduzir_para_binario(instrucao)
         self.bin.append(f"Instrução: {instrucao} -> Binário: {binario}")
 
@@ -120,7 +119,7 @@ class SimuladorMIPS32:
             _, rt, offset_endereco = partes
             try:
                 offset, endereco = offset_endereco.split('(')
-                endereco = endereco[:-1]  # Remove o ')' do endereço
+                endereco = endereco[:-1] 
                 if endereco in self.vetores:
                     indice = int(offset) // 4
                     self.registradores[rt] = self.vetores[endereco][indice]
@@ -132,7 +131,7 @@ class SimuladorMIPS32:
             _, rt, offset_endereco = partes
             try:
                 offset, endereco = offset_endereco.split('(')
-                endereco = endereco[:-1]  # Remove o ')' do endereço
+                endereco = endereco[:-1]
                 if endereco in self.vetores:
                     indice = int(offset) // 4
                     self.vetores[endereco][indice] = self.registradores[rt]
@@ -178,7 +177,6 @@ class SimuladorMIPS32:
         return '\n'.join(self.saidas)
 
     def obter_texto_vetores(self):
-        texto = "Vetores:\n"
         for nome, valores in self.vetores.items():
             texto += f"{nome}: {valores}\n"
         return texto
