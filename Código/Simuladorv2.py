@@ -39,6 +39,7 @@ class SimuladorMIPS32:
                     partes = linha.split()
                     if len(partes) >= 2:
                         var = partes[0]
+                        var = var[:-1]
                         tipo = partes[1]
                         if tipo == '.word':
                             try:
@@ -77,10 +78,9 @@ class SimuladorMIPS32:
             instrucao = self.instrucoes[self.cont]
             if instrucao.startswith("syscall"):
                 if self.registradores['$v0'] == 10:
-                    self.saidas.append("Programa encerrado")
                     break
                 elif self.registradores['$v0'] == 1:
-                    self.saidas.append(f"Saída: {self.registradores['$a0']}")
+                    self.saidas.append(self.registradores['$a0'])
             self.cont += 1
             self.executar_instrucao(instrucao)
 
@@ -119,7 +119,7 @@ class SimuladorMIPS32:
             _, rt, offset_endereco = partes
             try:
                 offset, endereco = offset_endereco.split('(')
-                endereco = endereco[:-1] 
+                endereco = endereco[:-1]
                 if endereco in self.vetores:
                     indice = int(offset) // 4
                     self.registradores[rt] = self.vetores[endereco][indice]
@@ -177,6 +177,7 @@ class SimuladorMIPS32:
         return '\n'.join(self.saidas)
 
     def obter_texto_vetores(self):
+        texto = "Vetores:\n"
         for nome, valores in self.vetores.items():
             texto += f"{nome}: {valores}\n"
         return texto
@@ -236,7 +237,6 @@ class MIPS_GUI:
 
         self.area_saidas.delete(1.0, tk.END)
         self.area_saidas.insert(tk.INSERT, "Saidas:\n" + self.simulador.obter_saidas())
-        self.area_saidas.insert(tk.INSERT, self.simulador.obter_texto_vetores())
 
         self.area_bin.delete(1.0, tk.END)
         self.area_bin.insert(tk.INSERT, "Binários:\n")
