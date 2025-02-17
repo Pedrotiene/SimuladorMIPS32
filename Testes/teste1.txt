@@ -1,5 +1,8 @@
 .data
     msg1: .asciiz 'resultado: '   # Vetor de 4 elementos
+    vetor1: .word 10,20,30,40     # Vetor de 4 elementos
+    vetor2: .space 12             # Vetor de 3 elementos (12 bytes)
+    valor: .word 5                # Variável simples
 
 .text
 main:
