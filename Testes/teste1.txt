@@ -1,8 +1,22 @@
-addi $t0, $zero, 5    # $t0 = 5
+.data
+    msg1: .asciiz 'resultado: '   # Vetor de 4 elementos
 
-li $v0, 1
-add $a0, $t0, $zero
-syscall
+.text
+main:
+    li $t0, 5                     # Carrega 5 em $t0
+    lw $t1, 0(vetor1)             # Carrega o primeiro elemento de vetor1 em $t1
+    lw $t2, 4(vetor1)             # Carrega o terceiro elemento de vetor1 em $t2
+    sw $t0, 8(vetor2)             # Armazena $t0 no segundo elemento de vetor2
+    lw $t3, 0(valor)              # Carrega o valor da variável simples em $t3
+    add $t4, $t1, $t2             # Soma $t1 e $t2, armazena em $t4
 
-li $v0, 10
-syscall
+    li $a0, 4
+    la $v1, msg1
+    li $v0, 1
+    add $a0, $t4, $zero
+    syscall                       # Chamada de sistema
+    
+
+
+    li $v0, 10
+    syscall                       # Chamada de sistema
