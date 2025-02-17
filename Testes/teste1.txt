@@ -1,5 +1,5 @@
 .data
-    msg1: .asciiz 'resultado: '   # Vetor de 4 elementos
+    msg1: .asciiz "resultado: "   # Vetor de 4 elementos
     vetor1: .word 10,20,30,40     # Vetor de 4 elementos
     vetor2: .space 12             # Vetor de 3 elementos (12 bytes)
     valor: .word 5                # Variável simples
@@ -13,8 +13,9 @@ main:
     lw $t3, 0(valor)              # Carrega o valor da variável simples em $t3
     add $t4, $t1, $t2             # Soma $t1 e $t2, armazena em $t4
 
-    li $a0, 4
-    la $v1, msg1
+    li $v0, 4
+    la $a0, msg1
+    syscall
     li $v0, 1
     add $a0, $t4, $zero
     syscall                       # Chamada de sistema

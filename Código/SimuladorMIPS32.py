@@ -203,6 +203,9 @@ class SimuladorMIPS32:
             'syscall': '000000',
             'lw': '100011',
             'sw': '101011',
+            'slt': '101010',
+            'slti': '001010',
+            'la': '001101',
         }
 
         if opcode in tabela_opcode:
