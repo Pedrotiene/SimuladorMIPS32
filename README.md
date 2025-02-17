@@ -1,1 +1,1 @@
-Adicionar .data e .text, imprimir string, traduzir e exibir em binario as intruções e os registradores, melhorar a interface grafica
+Trabalho final da materia de Arquitetura e organização de computadores, fizemos o simulador da arquitetura MIPS 32 em python.
