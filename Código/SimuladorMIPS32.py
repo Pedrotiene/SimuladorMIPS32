@@ -1,3 +1,5 @@
+#Arthur Palma e Pedro Tiene
+
 import tkinter as tk
 from tkinter import filedialog, scrolledtext
 
