@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, scrolledtext
-
+#teste
 class SimuladorMIPS32:
     def __init__(self):
         self.registradores = self.inicializar_registradores()
