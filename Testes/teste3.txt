@@ -1,0 +1,10 @@
+.data
+    valor1: .word 10
+    valor2: .word 20
+
+.text
+    lw $t0 0(valor1)     # Carrega 10 em $t0
+    lw $t1 0(valor2)     # Carrega 20 em $t1
+    slt $t2, $t0, $t1    # $t2 = 1, pois 10 < 20
+    slti $t3, $t0, 15    # $t3 = 1, pois 10 < 15
+    syscall
