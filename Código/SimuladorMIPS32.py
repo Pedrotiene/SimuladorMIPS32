@@ -120,6 +120,18 @@ class SimuladorMIPS32:
         elif opcode == 'sll':
             _, rd, rt, shamt = partes
             self.registradores[rd] = self.registradores[rt] << int(shamt)
+        elif opcode == 'slt':
+            _, rd, rs, rt = partes
+            if self.registradores[rs] < self.registradores[rt]:
+                self.registradores[rd] = 1
+            else:
+                self.registradores[rd] = 0
+        elif opcode == 'slti':
+            _, rt, rs, imediato = partes
+            if self.registradores[rs] < int(imediato):
+                self.registradores[rt] = 1
+            else:
+                self.registradores[rt] = 0
         elif opcode == 'li':
             _, rt, imediato = partes
             self.registradores[rt] = int(imediato)
